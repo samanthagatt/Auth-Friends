@@ -1,25 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { Home } from './components/Home';
+import { Friend } from './components/Friend';
+import { AddFriend } from './components/AddFriend';
+import { AllFriends } from './components/AllFriends';
+import { PrivateRoute } from './components/PrivateRoute';
+import { Login } from './components/Login';
+import { deleteAuthToken } from './utils/cookiesUtil';
 
 function App() {
+  const handleLogout = e => {
+    e.preventDefault();
+    deleteAuthToken();
+    window.location.href = "/";
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <Router>
+      <header>
+        <p>Friends</p>
+        <nav>
+          <Link to="/" className="nav-button">Home</Link>
+          <Link to="/friends/add" className="nav-button">Add Friend</Link>
+          <button className="nav-button" onClick={handleLogout}>Log Out</button>
+        </nav>
       </header>
-    </div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <PrivateRoute exact path="/friends" component={AllFriends} />
+        <PrivateRoute path="/friends/add" component={AddFriend} />
+        <PrivateRoute path="/friend/:friendId" component={Friend} />
+      </Switch>
+    </Router>
   );
 }
 

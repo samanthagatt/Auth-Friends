@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+p {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: antiquewhite;
+  padding: 16px;
+}
+
+.nav-button {
+  margin: 0 10px;
+}
+
+.flex-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.flex-list .flex-item {
+  margin: 1em;
+  padding: 0.5em 1.5em;
+  background: #eee;
+  text-decoration: none;
+  color: #111;
+}
+
+.flex-list .flex-item:hover {
+  background: #ddd;
+}
